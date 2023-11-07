@@ -1,11 +1,11 @@
 import { fetchUsers } from "./userActions";
 import {createSlice, isAction, PayloadAction} from '@reduxjs/toolkit';
-import {User} from './data';
+import {user, User} from './data';
 
 interface userState{
-    data: User,
+    data: User[],
     status: string,
-    error: Error
+    error: any
 }
 
 const initialState: userState = {
@@ -16,7 +16,7 @@ const initialState: userState = {
 
 const usersReducer = createSlice({
     name: 'users',
-    initialState: {data: [], status: 'idle', error: null},
+    initialState: initialState,
     reducers: { },
     extraReducers: (builder) => {
         builder.addCase(fetchUsers.pending, (state) => {

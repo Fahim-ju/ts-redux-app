@@ -3,17 +3,16 @@ import {useSelector, useDispatch} from 'react-redux';
 import { RootState, AppDispatch } from '../redux/store';
 import { fetchUsers } from "../redux/user/userActions";
 
-
 function UserList(){
     const dispatch = useDispatch<AppDispatch>();
-    const users = useSelector((state: RootState) => state.user.data);
+    const users   = useSelector((state: RootState) => state.user.data);
     const status = useSelector((state: RootState) => state.user.status)
 
     useEffect( () => {
         if(status === 'idle'){
-            dispatch( fetchUsers() as any);
+            dispatch( fetchUsers() as any);  ///type error
         }
-    }, [status,dispatch] );
+    }, [status] );
 
 
     if(status === 'loading'){

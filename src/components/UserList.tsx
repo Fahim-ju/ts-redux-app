@@ -1,19 +1,18 @@
 import { useEffect } from "react";
-import {useSelector, useDispatch} from 'react-redux';
-import { RootState, AppDispatch, useAppDispatch } from '../redux/store';
+import { useAppSelector, useAppDispatch } from "../redux/hooks";
+import {  RootState} from '../redux/store';
 import { fetchUsers } from "../redux/user/userActions";
-import { ThunkDispatch } from "@reduxjs/toolkit";
 
 function UserList(){
-    const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
-    const users   = useSelector((state: RootState) => state.user.data);
-    const status = useSelector((state: RootState) => state.user.status)
+    const dispatch = useAppDispatch();
+    const users   = useAppSelector((state) => state.user.data);
+    const status = useAppSelector((state) => state.user.status);
 
     useEffect( () => {
         if(status === 'idle'){
-            dispatch( fetchUsers() );  ///type error
+            dispatch( fetchUsers() );  
         }
-    }, [] );
+    }, [status, dispatch] );
 
 
     if(status === 'loading'){

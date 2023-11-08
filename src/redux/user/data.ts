@@ -1,4 +1,4 @@
-class User{
+interface User{
     id: number;
     name: string;
     username: string;
@@ -21,45 +21,14 @@ class User{
         bs: string;
     };
 
-    constructor(
-        id: number,
-        name: string,
-        username: string,
-        email: string,
-        address: {
-            street: string;
-            suite: string;
-            city: string;
-            zipcode: string;
-            geo: {
-                lat: string;
-                lng: string;
-            };
-        },
-        phone: string,
-        website: string,
-        company: {
-            name: string;
-            catchPhrase: string;
-            bs: string;
-        }){
-            this.id = id;
-            this.name = name;
-            this.username = username;
-            this.email = email;
-            this.address = address;
-            this.phone = phone;
-            this.website = website;
-            this.company = company;
-        }
 };
 
-const user = new User(
-    326,
-  "Md Fahimul Karim",
-  "Fahim",
-  "f.nahian@gmail.com",
-  {
+  const user = {
+    id: 326,
+  name: "Md Fahimul Karim",
+  username:"Fahim",
+  email: "f.nahian@gmail.com",
+  address: {
     street: "abc",
     suite: "Apt. 556",
     city: "Gwenborough",
@@ -69,13 +38,13 @@ const user = new User(
       lng: "81.1496",
     },
   },
-  "0171522022",
-  "fahim.com",
-  {
+  phone: "0171522022",
+  website: "fahim.com",
+  company:{
     name: "Kaz Software",
     catchPhrase: "Multi-layered client-server neural-net",
     bs: "harness real-time e-markets",
   }
-  );
-
-  export {user, User};
+  };
+export {user};
+export default User;

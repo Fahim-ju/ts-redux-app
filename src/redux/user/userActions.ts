@@ -1,6 +1,5 @@
-import { AnyAction, createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import instanceAxios from "../../interceptors/userInterceptor";
-import { User } from "./data";
 
 //create an asynchronous action
 export const fetchUsers  = createAsyncThunk('user/fetchUsers',async () => {

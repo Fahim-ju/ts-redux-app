@@ -1,6 +1,6 @@
 import { fetchUsers } from "./userActions";
 import {createSlice, isAction, PayloadAction} from '@reduxjs/toolkit';
-import {user, User} from './data';
+import { User} from './data';
 
 interface userState{
     data: User[],

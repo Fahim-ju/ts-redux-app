@@ -1,19 +1,26 @@
 import { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
-import {  RootState} from '../redux/store';
-import { fetchUsers } from "../redux/user/userActions";
+import source, {fetchUsers} from "../redux/user/userActions";
+import { Link } from "react-router-dom";
 
 function UserList(){
     const dispatch = useAppDispatch();
     const users   = useAppSelector((state) => state.user.data);
     const status = useAppSelector((state) => state.user.status);
-
+    
     useEffect( () => {
+        console.log("UserList is running..." + status);
         if(status === 'idle'){
-            dispatch( fetchUsers() );  
+            dispatch( fetchUsers() ); 
         }
-    }, [status, dispatch] );
 
+        return () => {
+            console.log("return of useEffect");
+            //source.cancel("The call is cancelled from useEFFEct");
+        }
+
+    }, );
+    
 
     if(status === 'loading'){
         return (<div> Loading.. </div>);
@@ -24,7 +31,8 @@ function UserList(){
 
     return (
         <div>
-            <h2>User List</h2>
+            <h1>User List</h1>
+            <Link to='/counter'> Counter </Link> 
             <ul>
                 {users.map((user) => (
                 <li key={user.id}>{user.name}</li>

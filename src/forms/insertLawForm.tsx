@@ -1,0 +1,111 @@
+import React, { ChangeEventHandler, useState } from "react";
+import instanceAxios from "../interceptors/userInterceptor";
+
+interface InsertLawFormData {
+  Name: string;
+  Description: string;
+}
+
+function InsertLaw() {
+  const [formData, setFormData] = useState({
+    Name: "",
+    Description: "",
+  });
+
+  const insertLawHandler = (event: React.FormEvent): void => {
+    event.preventDefault();
+    ///onSubmit
+    const res = instanceAxios
+      .post("https://localhost:7010/api/Laws", formData)
+      .then((response) => {
+        console.log(response);
+        setFormData({
+          ...formData,
+          Name: "",
+          Description: "",
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    console.log("submitted Fahim--> " + res);
+  };
+
+  const handleInputChange: ChangeEventHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  return (
+    <>
+      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            Insert Law
+          </h2>
+        </div>
+
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <form className="space-y-6" action="" onSubmit={insertLawHandler}>
+            <div>
+              <label
+                htmlFor="lawName"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Law Name
+              </label>
+
+              <div className="mt-2">
+                <input
+                  id="Law"
+                  name="Name"
+                  type="text"
+                  value={formData.Name}
+                  onChange={handleInputChange}
+                  placeholder="Law Name:"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div className="col-span-full">
+              <label
+                htmlFor="about"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Description
+              </label>
+              <div className="mt-2">
+                <textarea
+                  id="description"
+                  name="Description"
+                  rows={3}
+                  value={formData.Description}
+                  onChange={handleInputChange}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  placeholder="Describe the law here..."
+                />
+              </div>
+            </div>
+            <div>
+              <button
+                type="submit"
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Add Law
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default InsertLaw;

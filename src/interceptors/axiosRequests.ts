@@ -2,7 +2,7 @@ import axios, { CancelToken } from "axios";
 import instanceAxios from "./userInterceptor";
 
 export const apiRequestsFormat = {
-  getRequest: function (url: string, cancelToken: CancelToken) {
+  getRequest: function (url: string, cancelToken?: CancelToken) {
     let config = { cancelToken: cancelToken };
     return instanceAxios.get(url,config)
       .then(function (res) {

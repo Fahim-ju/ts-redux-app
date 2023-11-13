@@ -11,8 +11,8 @@ instanceAxios.interceptors.request.use((reqConfig : InternalAxiosRequestConfig) 
   });
   
   instanceAxios.interceptors.response.use((response : AxiosResponse ) => {
-    response.data.push(user); // my data inserted to response
-    console.log(response + " "+cnt++);
+    //response.data.push(user); // my data inserted to response
+    //console.log(response + " "+cnt++);
     return response;
   }, error => {
     return Promise.reject(error);

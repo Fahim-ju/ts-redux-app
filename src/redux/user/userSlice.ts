@@ -1,6 +1,5 @@
 import { fetchUsers } from "./userActions";
 import {createSlice, isAction, PayloadAction} from '@reduxjs/toolkit';
-import { user } from './data';
 
 interface User{
     id: number;

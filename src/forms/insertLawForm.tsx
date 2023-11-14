@@ -1,35 +1,36 @@
 import React, { ChangeEventHandler, useState } from "react";
-import instanceAxios from "../interceptors/userInterceptor";
+import { Link, useLocation } from "react-router-dom";
+import { useAppDispatch } from "../redux/hooks";
+import { insertLaw } from "../redux/law/insertLawThunk";
 
-interface InsertLawFormData {
+interface LawFormData {
+  Id?: number;
   Name: string;
   Description: string;
 }
 
-function InsertLaw() {
+function InsertLawForm() {
+  const location = useLocation();
+  const { isUpdate, lawData } = location.state;
+  console.log("location data", location.state);
   const [formData, setFormData] = useState({
     Name: "",
     Description: "",
+    ...lawData,
   });
+
+  const dispatch = useAppDispatch();
 
   const insertLawHandler = (event: React.FormEvent): void => {
     event.preventDefault();
-    ///onSubmit
-    const res = instanceAxios
-      .post("https://localhost:7010/api/Laws", formData)
-      .then((response) => {
-        console.log(response);
-        setFormData({
-          ...formData,
-          Name: "",
-          Description: "",
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
-    console.log("submitted Fahim--> " + res);
+    if (isUpdate) {
+      //dispatch(updateLaw(formData));
+      console.log("Implement update operation");
+    } else dispatch(insertLaw(formData));
+    setFormData({
+      Name: "",
+      Description: "",
+    });
   };
 
   const handleInputChange: ChangeEventHandler = (
@@ -43,10 +44,18 @@ function InsertLaw() {
 
   return (
     <>
+      <Link to="/LawList">
+        <button
+          className="middle none center rounded-lg bg-indigo-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-indigo-500/20 transition-all hover:shadow-lg hover:shadow-indigo-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          style={{ margin: "15px" }}
+        >
+          Show Laws
+        </button>
+      </Link>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Insert Law
+            {isUpdate ? <p>Update Law</p> : <p>Insert Law</p>}
           </h2>
         </div>
 
@@ -98,7 +107,7 @@ function InsertLaw() {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Add Law
+                {isUpdate ? <p>Update Law</p> : <p>Insert Law</p>}
               </button>
             </div>
           </form>
@@ -108,4 +117,5 @@ function InsertLaw() {
   );
 }
 
-export default InsertLaw;
+export default InsertLawForm;
+export type { LawFormData };

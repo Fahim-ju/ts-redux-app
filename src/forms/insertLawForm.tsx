@@ -2,20 +2,24 @@ import React, { ChangeEventHandler, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAppDispatch } from "../redux/hooks";
 import { insertLaw } from "../redux/law/insertLawThunk";
+import { updateLaw } from "../redux/law/updateLawThunk";
 
 interface LawFormData {
   Id?: number;
   Name: string;
   Description: string;
+  Amount: number;
 }
 
 function InsertLawForm() {
   const location = useLocation();
-  const { isUpdate, lawData } = location.state;
-  console.log("location data", location.state);
+  const { isUpdate, lawData } = location.state
+    ? location.state
+    : { isUpdate: false, lawData: { Name: "", Description: "" } };
   const [formData, setFormData] = useState({
     Name: "",
     Description: "",
+    Amount: 0,
     ...lawData,
   });
 
@@ -24,12 +28,12 @@ function InsertLawForm() {
   const insertLawHandler = (event: React.FormEvent): void => {
     event.preventDefault();
     if (isUpdate) {
-      //dispatch(updateLaw(formData));
-      console.log("Implement update operation");
+      dispatch(updateLaw(formData));
     } else dispatch(insertLaw(formData));
     setFormData({
       Name: "",
       Description: "",
+      Amount: 0,
     });
   };
 
@@ -63,7 +67,7 @@ function InsertLawForm() {
           <form className="space-y-6" action="" onSubmit={insertLawHandler}>
             <div>
               <label
-                htmlFor="lawName"
+                htmlFor="Law"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Law Name
@@ -85,7 +89,7 @@ function InsertLawForm() {
 
             <div className="col-span-full">
               <label
-                htmlFor="about"
+                htmlFor="description"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Description
@@ -99,6 +103,27 @@ function InsertLawForm() {
                   onChange={handleInputChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   placeholder="Describe the law here..."
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="amount"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Amount
+              </label>
+
+              <div className="mt-2">
+                <input
+                  id="amount"
+                  name="Amount"
+                  type="number"
+                  value={formData.Amount}
+                  onChange={handleInputChange}
+                  placeholder="Amount:"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>

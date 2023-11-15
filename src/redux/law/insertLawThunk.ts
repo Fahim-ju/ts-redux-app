@@ -9,7 +9,7 @@ let source = axios.CancelToken.source();
 
 export const insertLaw  = createAsyncThunk('law/insertLaw',async (formData: LawFormData) => {
     try{
-        const response = await instanceAxios.post("https://localhost:7010/api/Laws", formData);
+        const response = await instanceAxios.post("https://localhost:44322/Law/AddLaw", formData);
         return response;
     } catch(error){
         throw error;

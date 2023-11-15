@@ -6,13 +6,14 @@ import instanceAxios from "../../interceptors/userInterceptor";
 // const fetchController = new AbortController();
 let source = axios.CancelToken.source();
 
-export const getAllLawthunk  = createAsyncThunk('law/getAllLaw',async () => {
+export const deleteLaw  = createAsyncThunk('law/deleteLaw',async (Id: number) => {
     try{
-        const response = await instanceAxios.get("https://localhost:44322/Law/GetLaws");
-        return response.data;
+        const response = await instanceAxios.delete(`https://localhost:44322/Law/${Id}`);
+        return response;
     } catch(error){
         throw error;
     }
 });
 
+export default source;
 

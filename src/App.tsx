@@ -8,6 +8,7 @@ import Home from "./components/Home";
 import NewTest from "./components/NewTest";
 import InsertLawForm from "./forms/insertLawForm";
 import { LawList } from "./components/LawList";
+import InsertUserForm from "./forms/insertUserForm";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/users" Component={UserList} />
         <Route path="/test" Component={Test} />
         <Route path="/insertLaw" Component={InsertLawForm} />
+        <Route path="/insertUser" Component={InsertUserForm} />
         <Route path="/LawList" Component={LawList} />
         <Route path="*" Component={NoPage} />
       </Routes>

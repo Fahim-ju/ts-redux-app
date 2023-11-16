@@ -12,6 +12,27 @@ code {
     monospace;
 }
 
+
+.textarea-container {
+  width: 100%;
+  max-width: 400px; /* Adjust as needed */
+  margin: 10px 0;
+  min-height: 20%;
+  max-height: 30%;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical; /* Allow vertical resizing */
+  font-family: 'Arial', sans-serif; /* Specify your preferred font */
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

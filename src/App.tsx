@@ -9,6 +9,7 @@ import NewTest from "./components/NewTest";
 import InsertLawForm from "./forms/insertLawForm";
 import { LawList } from "./components/LawList";
 import InsertUserForm from "./forms/insertUserForm";
+import InsertFineForm from "./forms/insertFineForm";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/test" Component={Test} />
         <Route path="/insertLaw" Component={InsertLawForm} />
         <Route path="/insertUser" Component={InsertUserForm} />
+        <Route path="/insertFine" Component={InsertFineForm} />
         <Route path="/LawList" Component={LawList} />
         <Route path="*" Component={NoPage} />
       </Routes>

@@ -143,3 +143,5 @@ export function LawList() {
     </div>
   );
 }
+
+export type { Law };

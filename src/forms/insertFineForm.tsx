@@ -130,7 +130,7 @@ export default function InsertFineForm() {
         </h2>
       </div>
       <div className="mt-5 sm:mx-auto flex items-top justify-center">
-        <div className="relative group">
+        <div className="relative group z-10">
           <button
             onClick={toggleUserDropdown}
             id="dropdown-button"
@@ -187,7 +187,7 @@ export default function InsertFineForm() {
         </div>
       </div>
       <div className="mt-5 sm:mx-auto flex items-top justify-center">
-        <div className="relative group ">
+        <div className="relative group z-0">
           <button
             onClick={toggleLawDropdown}
             id="dropdown-button"
